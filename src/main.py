@@ -152,7 +152,22 @@ class Algorithm:
         print(f'Resultado da geração {i + 1}: {self.best_individual()}')
 
 def main():
-    algorithm = Algorithm()
+    option = input('Deseja customizar os dados? [S/N] ')
+
+    if option == 'S':
+        initial_number_of_individuals = int(input('Qual numero inicial de individos? [Entre com um numero inteiro] '))
+
+        number_of_generations = int(input('Qual numero de geracoes? [Entre com um numero inteiro] '))
+        
+        crossover_rate = float(input('Qual taxa de crossover? [Entre com um numero entre 0 e 1] '))
+        
+        mutation_rate = float(input('Qual taxa de mutacao? [Entre com um numero entre 0 e 1] '))
+        
+        max_population_size = int(input('Qual tamanho maximo da populacao? [Entre com um numero inteiro] '))
+
+        algorithm = Algorithm(initial_number_of_individuals, number_of_generations, crossover_rate, mutation_rate, max_population_size)
+    else:
+        algorithm = Algorithm()
 
     algorithm.run()
 
