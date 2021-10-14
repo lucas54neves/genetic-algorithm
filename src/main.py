@@ -76,12 +76,12 @@ class Algorithm:
     def best_individual(self):
         """
         Metodo que retorna o melhor individuo da populacao. O melhor individuo
-        eh o individuo com maior resultado da funcao fitness.
+        eh o individuo com menor resultado da funcao fitness.
 
         Returns:
-            Individual: Individuo com maior valor resultante da funcao fitness.
+            Individual: Individuo com menor valor resultante da funcao fitness.
         """
-        return max(self.population.individuals, key=lambda individual: individual.fitness_function_result)
+        return min(self.population.individuals, key=lambda individual: individual.fitness_function_result)
     
     def convert_binary_to_decimal(self, number_as_binary):
         """
@@ -123,7 +123,7 @@ class Algorithm:
         """
         Metodo que seleciona um individuo aleatoriamente na populacao.
         Inicialmente, dois individuos sao selecionados aleatoriamente e, depois,
-        o individuo com maior valor resultante da funcao fitness.
+        o individuo com menor valor resultante da funcao fitness.
 
         Returns:
             Individual: Individuo aleatorio.
@@ -136,7 +136,7 @@ class Algorithm:
 
         individual_2 = self.population.individuals[index_2]
 
-        return individual_1 if individual_1.fitness_function_result >= individual_2.fitness_function_result else individual_2
+        return individual_1 if individual_1.fitness_function_result <= individual_2.fitness_function_result else individual_2
     
     def crossover(self, parent_1, parent_2):
         """
