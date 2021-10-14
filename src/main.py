@@ -242,7 +242,8 @@ class Algorithm:
         Metodo que executa o algoritmo. Inicialmente, a populacao inicial e
         avaliada. Depois, cada nova populacao eh criada a partir do crossover e
         da mutacao dos individuos da populacao anterior e depois a nova
-        populacao eh avaliada.
+        populacao eh avaliada. Seguindo o conceito de elitismo, cada nova
+        populacao recebe 30% dos melhores individuos da populacao anterior.
         """
         self.evaluate()
 
@@ -250,6 +251,12 @@ class Algorithm:
             print(f'Resultado da geracao {i}: {self.best_individual()}')
 
             new_population = Population(0)
+
+            sorted_population = sorted(self.population.individuals, key=lambda individual: individual.fitness_function_result)
+
+            cut_to_elitism = int(len(self.population.individuals) * 0.3)
+
+            new_population.individuals = sorted_population[:cut_to_elitism]
 
             while len(new_population.individuals) < self.max_population_size:
                 parent_1 = self.select()
